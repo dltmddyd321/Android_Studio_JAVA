@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/count1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
+
+    <EditText
+        android:id="@+id/count2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
+
+    <EditText
+        android:id="@+id/count3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
+
+    <Button
+        android:id="@+id/add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="카운터 증가" />
+
+    <Button
+        android:id="@+id/add1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="카운터 증가1" />
+
+    <Button
+        android:id="@+id/add2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="카운터 증가3" />
+
+    <Button
+        android:id="@+id/stop1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="cnt1 중지" />
+
+    <Button
+        android:id="@+id/stop2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="cnt2 중지" />
+
+    <Button
+        android:id="@+id/stop3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="cnt3 중지" />
+
+</LinearLayout>
