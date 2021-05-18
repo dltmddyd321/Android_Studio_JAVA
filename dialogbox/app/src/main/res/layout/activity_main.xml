@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+    <Button
+        android:id="@+id/basicbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="기본 대화상자" />
+
+    <Button
+        android:id="@+id/hobby"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="나의 취미" />
+
+    <Button
+        android:id="@+id/sexdlg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="성별 확인" />
+
+    <Button
+        android:id="@+id/telecom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="통신사 선택" />
+
+    <Button
+        android:id="@+id/animal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="좋아하는 동물" />
+
+    <Button
+        android:id="@+id/multiple"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="다중 선택" />
+</LinearLayout>
