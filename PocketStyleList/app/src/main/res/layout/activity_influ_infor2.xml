@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="400dp"
+                android:layout_height="100dp"
+                app:srcCompat="@drawable/logo" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_margin="10dp"
+                app:srcCompat="@drawable/you4" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="짱구대디"
+                android:layout_gravity="center"
+                android:textSize="20dp">
+            </TextView>
+            <SlidingDrawer
+                android:id="@+id/slidingDrawer1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:content="@+id/content"
+                android:handle="@+id/handle" >
+
+                <Button
+                    android:id="@+id/handle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#f0ff"
+                    android:text="유튜브 정보" />
+
+                <LinearLayout
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#f0f000"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="구독자 수 : 53.8만 명"
+                        android:textSize="20dp"/>
+
+                    <ImageButton
+                        android:id="@+id/btnj"
+                        android:layout_width="256dp"
+                        android:layout_height="200dp"
+                        android:src="@drawable/youtube" />
+                </LinearLayout>
+            </SlidingDrawer>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

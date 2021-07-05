@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.tistory.webnautes.ex_7">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:label="PK_Style"
+        android:roundIcon="@drawable/icon"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Street"></activity>
+        <activity android:name=".InfluInfor2" />
+        <activity android:name=".InfluInfor" />
+        <activity android:name=".InfluList" />
+        <activity android:name=".Girlmall" />
+        <activity android:name=".Girlshops1" />
+        <activity android:name=".Girlhow" />
+        <activity android:name=".Filter" />
+        <activity android:name=".Shopmall" />
+        <activity android:name=".Shops" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
