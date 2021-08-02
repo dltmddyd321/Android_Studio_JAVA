@@ -18,7 +18,6 @@ import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -55,24 +54,20 @@ public class MainActivity extends AppCompatActivity {
                 }).check();
     }
 
-    private static final ArrayList<String> EXTENSIONS = new ArrayList<>(Arrays.asList(".pdf"));
-
     public ArrayList<File> findPdf (File file)
     {
         ArrayList<File> arrayList = new ArrayList<>();
         File[] files = file.listFiles();
 
 
-        if (files != null) {
-            for (File singleFile: files)
-            {
-                if(singleFile.isDirectory()){
-                    arrayList.addAll(findPdf(singleFile));
-                }
-                else {
-                    if(EXTENSIONS.contains(file.getName().substring(file.getName().lastIndexOf(".")))){
-                        arrayList.add(singleFile);
-                    }
+        for (File singleFile: files)
+        {
+            if(singleFile.isDirectory() && !singleFile.isHidden()){
+                arrayList.addAll(findPdf(singleFile));
+            }
+            else {
+                if(singleFile.getName().endsWith(".pdf")){
+                    arrayList.add(singleFile);
                 }
             }
         }
