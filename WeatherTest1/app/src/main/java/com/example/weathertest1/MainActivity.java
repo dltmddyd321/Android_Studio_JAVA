@@ -1,8 +1,17 @@
 package com.example.weathertest1;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,32 +36,35 @@ import java.io.StringReader;
 import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
-    EditText etCity, etCountry;
     TextView tvResult;
     ImageView weatherIcon;
 
     private final String url = "http://api.openweathermap.org/data/2.5/weather";
     private final String appid = "80b3b408e398e420f91d1e3fe08b5328";
     DecimalFormat decimalFormat = new DecimalFormat("#.##");
+    LocationManager locationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        etCity = findViewById(R.id.etCity);
-        etCountry = findViewById(R.id.etCountry);
         tvResult = findViewById(R.id.tvResult);
         weatherIcon = findViewById(R.id.weatherIcon);
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     }
 
     public void getWeatherDetails(View view) {
-        String tempUrl = "";
-        String lat = etCity.getText().toString().trim();
-        String lon = etCountry.getText().toString().trim();
-        if(lat.equals("")) {
-            tvResult.setText("City field can not be empty!");
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 0);
         } else {
-            tempUrl = url + "?lat=" + lat + "&lon=" + lon + "&appid=" + appid;
+            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            double longitude = location.getLongitude();
+            double latitude = location.getLatitude();
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, gpsLocationListener);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, gpsLocationListener);
+
+            String tempUrl = "";
+            tempUrl = url + "?lat=" + latitude + "&lon=" + longitude + "&appid=" + appid;
             StringRequest stringRequest = new StringRequest(Request.Method.POST, tempUrl, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -80,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                         JSONObject jsonObjectSys = jsonObject.getJSONObject("sys");
                         String countryName = jsonObjectSys.getString("country");
                         String cityName = jsonObject.getString("name");
-                        tvResult.setTextColor(Color.rgb(68,134,199));
+                        tvResult.setTextColor(Color.RED);
                         output += "Current weather of" + cityName + " (" + countryName + ")"
                                 + "\n Temp: " + decimalFormat.format(temp) + " 도"
                                 + "\n Feels Like: " + decimalFormat.format(feelsLike) + " 도"
@@ -95,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-            }, new Response.ErrorListener() {
+                }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Toast.makeText(getApplicationContext(), error.toString().trim(), Toast.LENGTH_SHORT).show();
@@ -104,6 +116,20 @@ public class MainActivity extends AppCompatActivity {
             RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
             requestQueue.add(stringRequest);
         }
-
     }
+
+    final LocationListener gpsLocationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(@NonNull Location location) {
+            String provider = location.getProvider();
+            double longitude = location.getLongitude();
+            double latitude = location.getLatitude();
+        }
+
+        public void onStatusChanged(String provider, int status, Bundle extras) { }
+
+        public void onProviderEnabled(String provider) { }
+
+        public void onProviderDisabled(String provider) { }
+    };
 }

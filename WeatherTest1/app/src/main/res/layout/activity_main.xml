@@ -22,24 +22,6 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/etCity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:ems="10"
-            android:hint="Enter City Name"
-            android:inputType="textPersonName" />
-
-        <EditText
-            android:id="@+id/etCountry"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:ems="10"
-            android:hint="Enter Country Code (optional)"
-            android:inputType="textPersonName" />
-
         <Button
             android:id="@+id/btnGet"
             android:layout_width="match_parent"
@@ -48,7 +30,7 @@
             android:background="#0070C7"
             android:backgroundTint="@null"
             android:onClick="getWeatherDetails"
-            android:text="Get"
+            android:text="Update!"
             android:textColor="@android:color/white" />
 
         <ScrollView
