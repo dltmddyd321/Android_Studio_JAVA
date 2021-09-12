@@ -36,10 +36,13 @@ import java.io.StringReader;
 import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
-    TextView tvResult;
+    TextView tvResult, res2;
     ImageView weatherIcon;
 
+    //데이터를 호출할 서비스의 기본 주소
     private final String url = "http://api.openweathermap.org/data/2.5/weather";
+
+    //서비스에서 제공받은 API KEY 등록
     private final String appid = "80b3b408e398e420f91d1e3fe08b5328";
     DecimalFormat decimalFormat = new DecimalFormat("#.##");
     LocationManager locationManager;
@@ -49,26 +52,37 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tvResult = findViewById(R.id.tvResult);
+        res2 = findViewById(R.id.res2);
         weatherIcon = findViewById(R.id.weatherIcon);
+
+        //GPS 시스템 활용을 위한 Location Manager 선언
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     }
 
     public void getWeatherDetails(View view) {
+        //위치에 따른 날씨 정보를 가져오는 함수로서, 먼저 사용자 위치 권한을 허가받기
         if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(MainActivity.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 0);
         } else {
+            //GPS Provider 통해 위도와 경도 값 받기
             Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             double longitude = location.getLongitude();
             double latitude = location.getLatitude();
+
+            //몇 초, 얼마의 거리마다 정보를 갱신 받을 것인지 지정
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, gpsLocationListener);
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, gpsLocationListener);
 
+            //사용자가 JSON 데이터를 받아올 주소 형식 지정
             String tempUrl = "";
             tempUrl = url + "?lat=" + latitude + "&lon=" + longitude + "&appid=" + appid;
+
+            //지정한 주소 형식을 요청하여 리소스를 생성하고 받아오기
             StringRequest stringRequest = new StringRequest(Request.Method.POST, tempUrl, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     String output = "";
+                    String output2 = "";
                     try {
                         JSONObject jsonObject = new JSONObject(response);
                         JSONArray jsonArray = jsonObject.getJSONArray("weather");
@@ -92,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
                         JSONObject jsonObjectSys = jsonObject.getJSONObject("sys");
                         String countryName = jsonObjectSys.getString("country");
                         String cityName = jsonObject.getString("name");
+                        res2.setTextColor(Color.GREEN);
                         tvResult.setTextColor(Color.RED);
                         output += "Current weather of" + cityName + " (" + countryName + ")"
                                 + "\n Temp: " + decimalFormat.format(temp) + " 도"
@@ -101,6 +116,8 @@ public class MainActivity extends AppCompatActivity {
                                 + "\n Wind Speed: " + wind + "m/s"
                                 + "\n Cloudiness: " + clouds + "%"
                                 + "\n Pressure: " + pressure + " hPa";
+                        output2 = "Wind Speed: " + wind + "m/s";
+                        res2.setText(output2);
                         tvResult.setText(output);
                         Picasso.get().load(iconUrl).into(weatherIcon);
                     } catch (JSONException e) {

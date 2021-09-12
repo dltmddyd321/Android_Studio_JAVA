@@ -44,6 +44,11 @@
 
         </ScrollView>
 
+        <TextView
+            android:id="@+id/res2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <ImageView
             android:id="@+id/weatherIcon"
             android:layout_width="100dp"
