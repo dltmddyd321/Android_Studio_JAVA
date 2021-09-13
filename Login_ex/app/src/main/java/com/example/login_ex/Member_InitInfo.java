@@ -1,6 +1,5 @@
 package com.example.login_ex;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,13 +24,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.time.ZoneId;
-import java.util.Map;
 
 public class Member_InitInfo extends AppCompatActivity {
     EditText nicknameEdit;
     Button initInfoButton;
-    DatabaseReference userDB;
 
+    private DatabaseReference userDB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,13 +53,15 @@ public class Member_InitInfo extends AppCompatActivity {
 
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             userDB = FirebaseDatabase.getInstance().getReference();
-            SignUp_Info signUp_info = new SignUp_Info(name, nickname, birth, phoneNumber);
+            Member_Info memberInfo = new Member_Info(name, nickname, birth, phoneNumber);
             if (user != null) {
-                userDB.child("users").child(user.getUid()).updateChildren((Map<String, Object>) signUp_info)
+                userDB.child("users").child(user.getUid()).setValue(memberInfo)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 ToastMessage("정보 등록 완료");
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
@@ -73,6 +73,7 @@ public class Member_InitInfo extends AppCompatActivity {
             }
         }
     }
+
 
     private void ToastMessage(String message){
         Toast.makeText(this, message,Toast.LENGTH_SHORT).show();

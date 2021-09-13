@@ -63,5 +63,17 @@
         app:layout_constraintStart_toEndOf="@id/singUpButton"
         app:layout_constraintTop_toBottomOf="@id/passwordEditText" />
 
+    <TextView
+        android:id="@+id/cntView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:text="count"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/singUpButton"
+        app:layout_constraintTop_toBottomOf="@id/passwordEditText" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

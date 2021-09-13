@@ -3,7 +3,6 @@ package com.example.login_ex;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.nfc.Tag;
 import android.os.Bundle;
@@ -21,7 +20,6 @@ import com.google.firebase.auth.UserInfo;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    public boolean updateInfo = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +61,5 @@ public class MainActivity extends AppCompatActivity {
     private void GoInitInfo(){
         Intent intent = new Intent(MainActivity.this, Member_InitInfo.class);
         startActivity(intent);
-        updateInfo = true;
     }
 }
