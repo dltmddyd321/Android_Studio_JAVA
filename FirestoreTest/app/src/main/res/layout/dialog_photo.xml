@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="10dp"
+    android:paddingHorizontal="30sp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="사진 가져오기"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/photoBtn"
+        android:layout_width="100dp"
+        android:layout_height="40sp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:background="#0000FF"
+        android:text="카메라"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/galleryBtn"
+        android:layout_width="100dp"
+        android:layout_height="40sp"
+        android:layout_gravity="center"
+        android:background="#0000FF"
+        android:text="갤러리"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+</LinearLayout>
