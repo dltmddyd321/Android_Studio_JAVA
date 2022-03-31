@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     Button button;
     Handler handler;
 
-    boolean isTrue = false;
+    String test = "Init";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         button = findViewById(R.id.button);
 
         clickBtnThread(button);
+
     }
 
     private void clickBtnThread(Button button) {
@@ -49,25 +51,33 @@ public class MainActivity extends AppCompatActivity {
                         //doInBackground
                         Log.d("doInBackground", "Now!");
 
-                        //1번 방법
-                        runOnUiThread(new Runnable() {
-                            @SuppressLint("SetTextI18n")
-                            @Override
-                            public void run() {
-                                //postExecute
-                                Log.d("postExecute", "Now!");
-                                isTrue = true;
-
-                                checkBoolean();
-                            }
-                        });
+//                        //1번 방법
+//                        runOnUiThread(new Runnable() {
+//                            @SuppressLint("SetTextI18n")
+//                            @Override
+//                            public void run() {
+//                                //postExecute
+//                                Log.d("postExecute", "Now!");
+//                                isTrue = true;
+//
+//                                checkBoolean();
+//                            }
+//                        });
 
                         //2번 방법
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
                                 Log.d("postExecute", "Now!");
-                                isTrue = true;
+                                test = "Back";
+
+                                Message message = new Message();
+                                Bundle bundle = new Bundle();
+
+                                bundle.putString("TRUE", test);
+                                message.setData(bundle);
+
+                                handler.sendMessage(message);
 
                                 checkBoolean();
                             }
@@ -81,8 +91,6 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void checkBoolean() {
-        if(isTrue) {
-            textView.setText("It's True!!");
-        }
+        textView.setText(test);
     }
 }
